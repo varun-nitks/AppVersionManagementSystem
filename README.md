@@ -1,51 +1,47 @@
 App Version Management System
 
-Every smartphone user these days has lots of apps installed in their smartphones. These apps follow multiple iterations in its lifecycle which can range from fresh installs to updates of an existing app.
+Overview
 
-Install is done for cases where the phone doesn't have the app previously installed.
-Updates are triggered when the app is preinstalled but a new feature is rolled out.
+Every smartphone user has multiple apps installed on their devices. These apps go through multiple iterations in their lifecycle, ranging from fresh installs to updates of an existing app. This system provides a way for app owners to manage app versions and directly roll out updates to user devices without relying on a marketplace like the Play Store or App Store.
 
-Design an app version management system for a mobile application, say PhonePe app.
+Real-World Example
 
-We will assume that there is no marketplace like Playstore / AppStore exists and every App Owner can directly interact with the target device irrespective of operating system ( android / iOS )
+Install: A user buys a new smartphone and wants to install the PhonePe app for the first time. The latest supported version is installed.
 
-To install any app, consumer can go to the website and directly install the app through online installer ( we’ll assume, this is something which is implemented )
+Update: A user has the PhonePe app installed. A new feature, such as dark mode, is rolled out. The app is updated directly on the user's phone.
 
-Real world example -
+Features
 
-Install - Consumer just bought his / her first Mobile device and wants to use PhonePe. In such case a fresh Install will happen - always latest version supported will be installed
-Consumer goes to phonepe website and selects install option given on website ( how it happens is outside the scope of problem statement )
+Install a fresh app if it is not already installed.
 
-Update- Above customer has installed the app and a few days later a new feature ( say dark mode ) is rolled out by PhonePe. In such cases, PhonePe will directly update the app on the phone.
+Update an existing app by comparing the installed version with the latest version.
 
-System Components -
+Store metadata for each app version, including minimum supported OS version.
 
-App and App versions -
-App will have a list of versions, each version denoting a new file and metadata.
-Version will have some meta data associated with it, like the minimum supported operating system ( android / iOS ) version etc.
-Roll out :: App admin can roll-out a new version from the backend. A roll-out can be either installing or updating the app -
-install - App is to be installed fresh in the device. We will install the app in the smartphone
-Update - takes a diff of installed version vs latest version and install the diff ( details in requirements part )
-Rollout strategy - New version rollout can be done with different strategies.
-Beta rollout - roll out the app version only on specific devices
-Percentage rollout - roll out the app version on some percent on devices
+Roll out new versions with different strategies:
 
-**Project Structure**
+Beta Rollout: Deploys the new version to specific devices.
+
+Percentage Rollout: Deploys the new version to a percentage of devices.
+
+Project Structure
+
 The project follows a layered architecture:
-└── com
+com
 └── example
-├── domain
-│   ├── AppVersion.java       # Represents an app version
-│   ├── App.java              # Represents an app with multiple versions
-│   └── Device.java           # Represents a device with installed apps
-├── repository
-│   ├── AppRepository.java    # Manages app data
-│   └── DeviceRepository.java # Manages device data
-├── service
-│   ├── AppVersionService.java # Core business logic
-│   ├── RolloutStrategy.java   # Interface for rollout strategies
-│   ├── BetaRolloutStrategy.java # Beta rollout implementation
-│   └── PercentageRolloutStrategy.java # Percentage rollout implementation
-├── controller
-│   └── AppVersionController.java # Handles user interaction
-└── Main.java                 # Entry point of the application
+    ├── domain
+    │   ├── AppVersion.java       # Represents an app version
+    │   ├── App.java              # Represents an app with multiple versions
+    │   └── Device.java           # Represents a device with installed apps
+    ├── repository
+    │   ├── AppRepository.java    # Manages app data
+    │   └── DeviceRepository.java # Manages device data
+    ├── service
+    │   ├── AppVersionService.java # Core business logic
+    │   ├── RolloutStrategy.java   # Interface for rollout strategies
+    │   ├── BetaRolloutStrategy.java # Beta rollout implementation
+    │   └── PercentageRolloutStrategy.java # Percentage rollout implementation
+    ├── controller
+    │   └── AppVersionController.java # Handles user interaction
+    └── Main.java                 # Entry point of the application
+
